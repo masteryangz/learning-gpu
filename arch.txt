@@ -1,0 +1,19 @@
+                    GPU
+                     │
+          ┌──────────┼──────────┐
+          ↓          ↓          ↓
+         SM0        SM1        SM2       SM3
+          │
+     ┌────┴────┐
+     │         │
+  Warp Pool  Scheduler
+               │
+      ┌────────┼────────┐
+      ↓        ↓        ↓
+     S0       S1       S2       S3
+      │        │        │        │
+      └────────┼────────┘
+               ↓
+          Issue Instruction
+               ↓
+          Execution Unit
