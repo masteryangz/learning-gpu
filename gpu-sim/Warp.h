@@ -9,6 +9,7 @@ class Warp {
     std::vector<Instruction> instructions;
 public:
     Warp(int id) : warp_id(id), pc(0) {}
+    int id();
     void addInstruction(const Instruction& inst);
     bool hasNextInstruction() const;
     Instruction& nextInstruction();
