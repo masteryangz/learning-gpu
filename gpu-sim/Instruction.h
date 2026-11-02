@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 enum class Opcode {
     ADD,
@@ -17,3 +18,5 @@ struct Instruction {
 
     int latency;
 };
+
+std::string opcodeToString(Opcode opcode);

@@ -7,13 +7,13 @@ void Scheduler::addWarp(Warp* warp) {
     warps.push_back(warp);
 }
 
-Warp* Scheduler::select_warp() {
+Warp* Scheduler::select_warp(int curr_cycle) {
     curr_warp = nullptr;
     if (warps.empty()) {
         return nullptr;
     }
     for (size_t i = 0; i < warps.size(); i++) {
-        if (warps[next_warp]->hasNextInstruction()) {
+        if (warps[next_warp]->hasNextInstruction() && sb.isReady(warps[next_warp]->id(), warps[next_warp]->nextInstruction(), curr_cycle)) {
             curr_warp = warps[next_warp];
             next_warp = (next_warp + 1) % warps.size();
             return curr_warp;
@@ -28,7 +28,8 @@ void Scheduler::issue(int cycle) {
         return;
     }
     Instruction& inst = curr_warp->nextInstruction();
+    sb.markBusy(curr_warp->id(), inst, cycle);
     // Issue the instruction (for simplicity, we just print it here)
-    std::cout << "Cycle " << cycle << ": " << "W" << curr_warp->id() << " issues " << static_cast<int>(inst.opcode) << std::endl;
+    std::cout << "Cycle " << cycle << ": " << "W" << curr_warp->id() << " issues " << opcodeToString(inst.opcode) << std::endl;
     curr_warp->advance();
 }

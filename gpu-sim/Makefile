@@ -4,7 +4,7 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -g
 
 TARGET = gpu-sim
 
-SRCS = main.cpp Warp.cpp Scheduler.cpp
+SRCS = $(wildcard *.cpp)
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(TARGET)

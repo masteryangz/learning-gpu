@@ -4,6 +4,7 @@
 #include <vector>
 
 class Warp {
+private:
     int warp_id;
     int pc;
     std::vector<Instruction> instructions;
