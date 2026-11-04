@@ -33,3 +33,12 @@ void Scheduler::issue(int cycle) {
     std::cout << "Cycle " << cycle << ": " << "W" << curr_warp->id() << " issues " << opcodeToString(inst.opcode) << std::endl;
     curr_warp->advance();
 }
+
+bool Scheduler::hasUnfinishedWarps() const {
+    for (Warp* warp : warps) {
+        if (warp->hasNextInstruction()) {
+            return true;
+        }
+    }
+    return false;
+}

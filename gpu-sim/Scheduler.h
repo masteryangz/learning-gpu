@@ -23,4 +23,6 @@ public:
     Warp* select_warp(int curr_cycle);
 
     void issue(int cycle);
+
+    bool hasUnfinishedWarps() const;
 };

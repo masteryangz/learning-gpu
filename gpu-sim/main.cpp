@@ -21,8 +21,12 @@ int main() {
     s.addWarp(&w0);
     s.addWarp(&w1);
     int cycle = 0;
-    while (s.select_warp(cycle) != nullptr) {
-        s.issue(cycle++);
+    while (s.hasUnfinishedWarps()) {
+        Warp* selected_warp = s.select_warp(cycle);
+        if (selected_warp != nullptr) {
+            s.issue(cycle);
+        }
+        cycle++;
     }
 
     return 0;
